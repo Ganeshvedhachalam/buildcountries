@@ -3,7 +3,7 @@ const  Country = () => {
 const [countries,setcountries]= useState([]);
 const [error, setError] = useState(null);
 
-    const apiUrl = "https://restcountries.com/v3.1/al"
+    const apiUrl = "https://restcountries.com/v3.1/all"
 
     const Tile =({country}) =>{
         return(<>
