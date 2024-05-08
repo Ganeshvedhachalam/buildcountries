@@ -16,7 +16,7 @@ const [error, setError] = useState(null);
             
             
             <img  style={{width:"100px",height:"100px"}} src={country.flags.png} alt="flag" />
-            <h1>{country.name.common}</h1>
+            <h1>{country.name.common} </h1>
             
             
          </div>
@@ -35,13 +35,13 @@ const [error, setError] = useState(null);
         fetch(apiUrl)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("Failed to fetch data");
+                    throw new Error("Failed to fetch data ");
                 }
                 return response.json();
             })
             .then((data) => setcountries(data))
             .catch((error) => {
-                console.error("Error fetching data:", error);
+                console.error("Error fetching data : ", error);
                 setError(error.message);
             });
     }, []);
