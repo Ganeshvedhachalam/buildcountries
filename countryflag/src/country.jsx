@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 const  Country = () => {
-const [countries,setcountries]= useState([])
+const [countries,setcountries]= useState([]);
+const [error, setError] = useState(null);
 
-    const apiUrl = "https://restcountries.com/v3.1/all"
+    const apiUrl = "https://restcountries.com/v3.1/al"
 
     const Tile =({country}) =>{
         return(<>
@@ -31,23 +32,34 @@ const [countries,setcountries]= useState([])
     }
 
     useEffect(() => { 
-        fetch(apiUrl).then((response)=>response.json())
-        .then((data)=>setcountries(data))
-        .catch((error)=>console.error("error fetching the data:", error))
-    },  [])
-
+        fetch(apiUrl)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch data");
+                }
+                return response.json();
+            })
+            .then((data) => setcountries(data))
+            .catch((error) => {
+                console.error("Error fetching data:", error);
+                setError(error.message);
+            });
+    }, []);
 
 
     return(
         <>
+        {error?<div>The Error: {error}</div>:
          <div className="COUNTRYCARDS" 
-        style={{ display:"flex",flexWrap:"wrap",justifyContent:"center",alignItems:"center" ,height:"100vh"}}
-        >
-          
-            {countries.map((country )=> <Tile key={country.cca3} country={country}/> )}
-
-            </div>
-
+         style={{ display:"flex",flexWrap:"wrap",justifyContent:"center",alignItems:"center" ,height:"100vh"}}
+         >
+           
+             {countries.map((country )=> <Tile key={country.cca3} country={country}/> )}
+ 
+             </div>
+ 
+        }
+        
         </>
     );
 }
