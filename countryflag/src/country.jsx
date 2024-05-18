@@ -29,7 +29,13 @@ const Country = () => {
             src={country.flags.png}
             alt="flag"
           />
-          <h1>{country.name.common} </h1>
+          <p>
+            {" "}
+            <span>
+              {" "}
+              <h2>{country.name.common}</h2>{" "}
+            </span>{" "}
+          </p>
         </div>
       </>
     );
